@@ -1,0 +1,1 @@
+<ul class="social">@foreach($socials as $class => [$link, $title, $icon])<li class="{{ $class }}"><a href="{{ $link ?: '#' }}" title="{{ $title }}"@if($link && $link !== '#') target="_blank" rel="noopener"@endif><i class="{{ $icon }}"></i></a></li>@endforeach</ul>

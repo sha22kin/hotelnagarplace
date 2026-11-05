@@ -1,0 +1,21 @@
+/* Dropdowns for menu items that have sub-menus (added from the admin panel).
+   Loaded only when the header menu actually contains sub-menus. */
+#Top_bar .menu > li > ul.sub-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  min-width: 220px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+  z-index: 300;
+  padding: 0;
+}
+#Top_bar .menu > li:hover > ul.sub-menu { display: block; }
+#Top_bar .menu ul.sub-menu li { display: block; border-bottom: 1px solid rgba(0, 0, 0, .05); }
+#Top_bar .menu ul.sub-menu li:last-child { border-bottom: 0; }
+#Top_bar .menu ul.sub-menu a { display: block; padding: 10px 20px; color: #444; font-size: 14px; line-height: 20px; }
+#Top_bar .menu ul.sub-menu a span { padding: 0; border: 0; line-height: 20px; }
+#Top_bar .menu ul.sub-menu li.current-menu-item > a,
+#Top_bar .menu ul.sub-menu a:hover { color: #0095eb; }
+#Side_slide .menu_wrapper ul.sub-menu a { padding-left: 35px; }

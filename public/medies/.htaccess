@@ -1,0 +1,20 @@
+# Uploaded media must never be executed as code.
+Options -Indexes -ExecCGI
+
+<FilesMatch "(?i)\.(php[0-9]?|phtml|phar|pht|shtml|cgi|pl|py|sh|htaccess)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    # Stop browsers from sniffing an upload into HTML/JS.
+    Header set X-Content-Type-Options "nosniff"
+    <FilesMatch "(?i)\.svg$">
+        Header set Content-Security-Policy "script-src 'none'"
+    </FilesMatch>
+</IfModule>
