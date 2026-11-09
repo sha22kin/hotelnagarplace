@@ -50,40 +50,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="{{ $hotelAsset('css/style.css') }}">
+<link rel="stylesheet" href="{{ $hotelAsset('css/style.css') }}?v={{ @filemtime(public_path('hotel/css/style.css')) }}">
 @if($hasSubMenus)<link rel="stylesheet" href="{{ $hotelAsset('css/submenu.css') }}">@endif
 @if($g->custom_css)<style>{!! $g->custom_css !!}</style>@endif
 {!! $g->script_head !!}
 @stack('head')
-
-<style>
-.contact_details {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: nowrap; /* কোনোভাবেই নিচে নামবে না, এক লাইনে থাকবে */
-    align-items: center;
-    gap: 10px; /* প্রতিটা আইটেমের মাঝের দূরত্ব */
-    white-space: nowrap;
-    overflow-x: auto; /* জায়গা কম হলে হরাইজন্টাল স্ক্রল করার সুবিধা দিবে */
-}
-
-.contact_details li {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px; /* মোবাইলে যেন ফিট হয়ে যায় সেজন্য সাইজ ছোট রাখা */
-}
-
-@media (max-width: 767px) {
-    .social {
-        display: none;
-    }
-}
-  
-</style>
-
 </head>
 <body class="@yield('body_class', 'page')">
 {!! $g->script_body !!}

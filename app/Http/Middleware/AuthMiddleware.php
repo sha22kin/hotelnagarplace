@@ -19,6 +19,10 @@ class AuthMiddleware
     {
         
         if(Auth::check() && url('log-out')!==$request->url()){
+            // Already logged in: admins go to the admin panel, everyone else to their dashboard.
+            if(Auth::user()->admin){
+                return redirect()->route('admin.dashboard');
+            }
             return redirect()->route('customer.dashboard');
         }
         return $next($request);

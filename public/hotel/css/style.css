@@ -523,7 +523,7 @@ hr {
 @media only screen and (max-width: 1239px) {
   #Top_bar .menu_wrapper #menu { display: none; }
   .responsive-menu-toggle { display: flex; }
-  #Top_bar .menu_wrapper { order: 3; }
+  #Top_bar .menu_wrapper { order: 3; margin-left: 0; }
   #Top_bar .search_button { margin-left: auto; }
 }
 
@@ -545,11 +545,16 @@ hr {
   #Action_bar .contact_details a,
   #Action_bar .social li a { color: #626262; }
   #Action_bar .contact_details .slogan { display: none; }
+  /* Mobile: phone + email side by side (wrap on very small screens), no social icons in the top bar */
+  #Action_bar .contact_details { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 14px; }
+  #Action_bar .contact_details li { font-size: 12px; }
+  #Action_bar .social { display: none; }
 
   #Top_bar .column { padding: 0; }
   #Top_bar .logo { margin: 0 10px 0 0; }
   #Top_bar #logo { height: 50px; line-height: 50px; padding: 5px 0; }
-  #Top_bar .search_button { padding: 0 10px; }
+  #Top_bar .search_button { padding: 0 12px; }
+  .responsive-menu-toggle { padding-right: 0; }
 
   .vc_col-6, .vc_col-4 { width: 100%; }
   .bwg-item { width: 50%; }
@@ -563,4 +568,12 @@ hr {
 
 @media only screen and (max-width: 479px) {
   .bwg-item { width: 100%; }
+  /* Keep the site name on one line next to the search / menu icons */
+  .logo-text { font-size: 20px; letter-spacing: 0; white-space: nowrap; }
+}
+
+@media only screen and (max-width: 359px) {
+  .logo-text { font-size: 17px; }
+  #Top_bar .search_button { padding: 0 6px; }
+  .responsive-menu-toggle { padding: 0 0 0 4px; }
 }
