@@ -16,6 +16,7 @@ Route::redirect('/home-page', '/', 301)->name('homepage');
 Route::get('/image/{template?}/{image?}',[WelcomeController::class,'imageView2'])->name('imageView2');
 Route::get('/sitemap.xml',[WelcomeController::class,'siteMapXml'])->name('siteMapXml');
 Route::post('/contact-mail',[WelcomeController::class,'contactMail'])->name('contactMail')->middleware('throttle:forms');
+Route::post('/booking-mail',[WelcomeController::class,'bookingMail'])->name('bookingMail')->middleware('throttle:forms');
 Route::post('/subscribe',[WelcomeController::class,'subscribe'])->name('subscribe')->middleware('throttle:forms');
 
 Route::get('/geo/filter/{id}',[WelcomeController::class,'geo_filter'])->name('geo_filter');

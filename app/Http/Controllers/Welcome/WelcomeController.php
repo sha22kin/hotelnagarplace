@@ -283,6 +283,42 @@ class WelcomeController extends Controller
 
     }
 
+    // "Book Now" page form: mail the booking request to Settings > Mail > Admin Mails.
+    public function bookingMail(Request $r){
+        $r->validate([
+            'name' => 'required|max:100',
+            'email' => 'required|email|max:100',
+            'phone' => 'required|max:30',
+            'package' => 'nullable|max:200',
+            'date_start' => 'nullable|max:50',
+            'date_end' => 'nullable|max:50',
+            'message' => 'nullable|max:1000',
+        ]);
+
+        $package = $r->package && $r->package !== 'Select Package' ? $r->package : 'Not selected';
+        $details = 'Package: '.$package."\n"
+            .'Booking Date Start: '.($r->date_start ?: 'N/A')."\n"
+            .'Booking Date End: '.($r->date_end ?: 'N/A');
+        $datas = ['r' => [
+            'name' => $r->name,
+            'email' => $r->email,
+            'mobile' => $r->phone,
+            'subject' => 'Booking request - '.$package,
+            'message' => $details.($r->message ? "\n\n".$r->message : ''),
+        ]];
+
+        $sent = general()->mail_status
+            && sendMail(adminMailRecipients(), general()->mail_from_name, 'Booking request - '.$r->name, $datas, 'mails.ContactMail');
+
+        if(!$sent){
+            $phone = general()->mobile ? ' Please call us: '.general()->mobile : '';
+            Session()->flash('error', 'Sorry, your booking request could not be sent right now.'.$phone);
+            return back()->withInput();
+        }
+
+        return back()->with('booking_sent', true);
+    }
+
     public function contactMail(Request $r){
         // return $r;
           $check = $r->validate([

@@ -151,25 +151,5 @@
     });
   }
 
-  // Book Now form: no server here, so hand the booking to the visitor's mail app
-  var form = document.getElementById('wpforms-form-71');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var val = function (name) { return (form.elements[name].value || '').trim(); };
-      var body =
-        'Name: ' + val('name') + '\n' +
-        'Email: ' + val('email') + '\n' +
-        'Phone: ' + val('phone') + '\n' +
-        'Package: ' + val('package') + '\n' +
-        'Booking Date Start: ' + val('date_start') + '\n' +
-        'Booking Date End: ' + val('date_end') + '\n\n' +
-        val('message');
-      var mailTo = form.getAttribute('data-mailto') || 'nagarvelabd@gmail.com';
-      window.location.href = 'mailto:' + mailTo +
-        '?subject=' + encodeURIComponent('Booking request - ' + val('name')) +
-        '&body=' + encodeURIComponent(body);
-      document.querySelector('.wpforms-confirmation').classList.add('show');
-    });
-  }
+  // Book Now form posts to the server (booking-mail route), which sends the mail.
 })();

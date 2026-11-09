@@ -170,7 +170,7 @@
 </div>
 <div id="body_overlay"></div>
 
-<script src="{{ $hotelAsset('js/main.js') }}"></script>
+<script src="{{ $hotelAsset('js/main.js') }}?v={{ @filemtime(public_path('hotel/js/main.js')) }}"></script>
 @if($g->custom_js)<script>{!! $g->custom_js !!}</script>@endif
 @stack('scripts')
 </body>
