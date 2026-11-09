@@ -55,6 +55,35 @@
 @if($g->custom_css)<style>{!! $g->custom_css !!}</style>@endif
 {!! $g->script_head !!}
 @stack('head')
+
+<style>
+.contact_details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: nowrap; /* কোনোভাবেই নিচে নামবে না, এক লাইনে থাকবে */
+    align-items: center;
+    gap: 10px; /* প্রতিটা আইটেমের মাঝের দূরত্ব */
+    white-space: nowrap;
+    overflow-x: auto; /* জায়গা কম হলে হরাইজন্টাল স্ক্রল করার সুবিধা দিবে */
+}
+
+.contact_details li {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px; /* মোবাইলে যেন ফিট হয়ে যায় সেজন্য সাইজ ছোট রাখা */
+}
+
+@media (max-width: 767px) {
+    .social {
+        display: none;
+    }
+}
+  
+</style>
+
 </head>
 <body class="@yield('body_class', 'page')">
 {!! $g->script_body !!}
@@ -64,14 +93,20 @@
   <div id="Header_wrapper">
     <header id="Header">
       <div id="Action_bar">
-        <div class="container">
-          <div class="column one">
-            <ul class="contact_details">
-              <li class="slogan">{{ $g->title }}</li>@if($g->mobile)<li class="phone"><i class="fa-solid fa-phone"></i><a href="tel:{{ $telHref }}">Cell: {{ $g->mobile }}</a></li>@endif<?php /* keep items adjacent */ ?>@if($g->email)<li class="mail"><i class="fa-regular fa-envelope"></i><a href="mailto:{{ $g->email }}">Email: {{ $g->email }}</a></li>@endif
-            </ul>
-            @include('hotel.layouts.social')
-          </div>
-        </div>
+       <div class="container">
+    <div class="column one">
+        <ul class="contact_details">
+            <li class="slogan">{{ $g->title }}</li>
+            @if($g->mobile)
+                <li class="phone"><i class="fa-solid fa-phone"></i><a href="tel:{{ $telHref }}">Cell: {{ $g->mobile }}</a></li>
+            @endif
+            @if($g->email)
+                <li class="mail"><i class="fa-regular fa-envelope"></i><a href="mailto:{{ $g->email }}">Email: {{ $g->email }}</a></li>
+            @endif
+        </ul>
+        @include('hotel.layouts.social')
+    </div>
+</div>
       </div>
 
       <div class="header_placeholder"></div>
